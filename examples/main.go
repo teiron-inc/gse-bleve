@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/blevesearch/bleve/v2"
-	gseb "github.com/vcaesar/gse-bleve"
+	gseb "github.com/teiron-inc/gse-bleve"
 )
 
 func main() {

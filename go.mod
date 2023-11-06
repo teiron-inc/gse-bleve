@@ -1,9 +1,10 @@
-module github.com/vcaesar/gse-bleve
+module github.com/teiron-inc/gse-bleve
 
 go 1.17
 
 require (
 	github.com/blevesearch/bleve/v2 v2.3.9
+	github.com/go-creed/sat v1.0.3
 	github.com/go-ego/gse v0.70.2
 	github.com/vcaesar/tt v0.20.0
 )

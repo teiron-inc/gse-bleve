@@ -9,8 +9,11 @@ import (
 
 	"github.com/blevesearch/bleve/v2/analysis"
 	"github.com/blevesearch/bleve/v2/registry"
+	"github.com/go-creed/sat"
 	"github.com/go-ego/gse"
 )
+
+var Dicter = sat.DefaultDict()
 
 const (
 	TokenName    = "gse"
@@ -141,6 +144,7 @@ func (c *GseCut) Cut(text string, opt string) []string {
 func (c *GseCut) Tokenize(text []byte) analysis.TokenStream {
 	result := make(analysis.TokenStream, 0)
 	t1 := string(text)
+	t1 = Dicter.Read(t1)
 	cuts := c.Trim(c.Cut(t1, c.opt))
 
 	azs := c.seg.Analyze(cuts, t1)
@@ -162,6 +166,7 @@ func (c *GseCut) Tokenize(text []byte) analysis.TokenStream {
 func (s *Separator) Tokenize(text []byte) analysis.TokenStream {
 	result := make(analysis.TokenStream, 0)
 	t1 := string(text)
+	t1 = Dicter.Read(t1)
 	cuts := s.Trim(strings.Split(t1, s.sep))
 
 	azs := s.seg.Analyze(cuts, t1)

@@ -15,7 +15,7 @@ import (
 
 var Dicter = sat.DefaultDict()
 
-const (
+var (
 	TokenName    = "gse"
 	SeparateName = "sep"
 )

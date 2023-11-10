@@ -19,13 +19,13 @@ type Option struct {
 
 // NewMappingSep new separator mapping
 func NewMappingSep(sep string, trim ...string) (*mapping.IndexMappingImpl, error) {
-	mapping1 := bleve.NewIndexMapping()
+	mapping := bleve.NewIndexMapping()
 	trimOpt := ""
 	if len(trim) > 0 {
 		trimOpt = trim[0]
 	}
 
-	err := mapping1.AddCustomTokenizer(SeparateName, map[string]interface{}{
+	err := mapping.AddCustomTokenizer(SeparateName, map[string]interface{}{
 		"type": SeparateName,
 		"sep":  sep,
 		"trim": trimOpt,
@@ -34,7 +34,7 @@ func NewMappingSep(sep string, trim ...string) (*mapping.IndexMappingImpl, error
 		return nil, err
 	}
 
-	err = mapping1.AddCustomAnalyzer(SeparateName, map[string]interface{}{
+	err = mapping.AddCustomAnalyzer(SeparateName, map[string]interface{}{
 		"type":      SeparateName,
 		"tokenizer": SeparateName,
 	})
@@ -42,15 +42,15 @@ func NewMappingSep(sep string, trim ...string) (*mapping.IndexMappingImpl, error
 		return nil, err
 	}
 
-	mapping1.DefaultAnalyzer = SeparateName
-	return mapping1, nil
+	mapping.DefaultAnalyzer = SeparateName
+	return mapping, nil
 }
 
 // NewMapping new bleve index mapping
 func NewMapping(opt Option) (*mapping.IndexMappingImpl, error) {
-	mapping1 := bleve.NewIndexMapping()
+	mapping := bleve.NewIndexMapping()
 
-	err := mapping1.AddCustomTokenizer(TokenName, map[string]interface{}{
+	err := mapping.AddCustomTokenizer(TokenName, map[string]interface{}{
 		"type":  TokenName,
 		"dicts": opt.Dicts,
 		"stop":  opt.Stop,
@@ -63,7 +63,7 @@ func NewMapping(opt Option) (*mapping.IndexMappingImpl, error) {
 		return nil, err
 	}
 
-	err = mapping1.AddCustomAnalyzer(TokenName, map[string]interface{}{
+	err = mapping.AddCustomAnalyzer(TokenName, map[string]interface{}{
 		"type":      TokenName,
 		"tokenizer": TokenName,
 	})
@@ -72,8 +72,8 @@ func NewMapping(opt Option) (*mapping.IndexMappingImpl, error) {
 		return nil, err
 	}
 
-	mapping1.DefaultAnalyzer = TokenName
-	return mapping1, nil
+	mapping.DefaultAnalyzer = TokenName
+	return mapping, nil
 }
 
 // New new bleve index
